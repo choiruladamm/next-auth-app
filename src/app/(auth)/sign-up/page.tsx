@@ -80,6 +80,7 @@ const SignUp: FC<SignUpProps> = ({}) => {
                       <FormControl>
                         <Input placeholder="leviokoye" {...field} />
                       </FormControl>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -92,6 +93,7 @@ const SignUp: FC<SignUpProps> = ({}) => {
                       <FormControl>
                         <Input placeholder="levi@test.com" {...field} />
                       </FormControl>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />

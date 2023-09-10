@@ -52,7 +52,7 @@ const SignIn: FC<SignInProps> = ({}) => {
         <CardHeader>
           <CardTitle className="text-2xl">Sign in</CardTitle>
           <CardDescription>
-            Don't have an account?
+            {`Don't have an account?`}
             <Link className="pl-2 font-medium text-blue-600" href={"sign-up"}>
               Sign up.
             </Link>
@@ -71,6 +71,7 @@ const SignIn: FC<SignInProps> = ({}) => {
                       <FormControl>
                         <Input placeholder="levi@test.com" {...field} />
                       </FormControl>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
