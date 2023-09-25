@@ -47,7 +47,7 @@ const SignIn: FC<SignInProps> = ({}) => {
   };
 
   return (
-    <div className="grid min-h-screen place-items-center">
+    <>
       <Card className="w-[20rem] md:w-[22rem]">
         <CardHeader>
           <CardTitle className="text-2xl">Sign in</CardTitle>
@@ -100,7 +100,7 @@ const SignIn: FC<SignInProps> = ({}) => {
           </Form>
         </CardContent>
       </Card>
-    </div>
+    </>
   );
 };
 

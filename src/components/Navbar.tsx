@@ -1,11 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
-'use client'
+"use client";
 
-import { FC, useState } from 'react'
+import Link from "next/link";
+import { FC, useState } from "react";
+import { Button } from "./ui/button";
 
-interface NavbarProps {
-  
-}
+interface NavbarProps {}
 
 const Navbar: FC<NavbarProps> = ({}) => {
   const [state, setState] = useState(false);
@@ -19,17 +19,12 @@ const Navbar: FC<NavbarProps> = ({}) => {
   ];
 
   return (
-    <nav className="bg-white border-b w-full md:static md:text-sm md:border-none">
+    <nav className="bg-white top-0 md:top-0 fixed z-10 border-b w-full md:text-sm md:border-none">
       <div className="items-center px-4 max-w-screen-xl mx-auto md:flex md:px-8">
-        <div className="flex items-center justify-between py-3 md:py-5 md:block">
-          <a href="javascript:void(0)">
-            <img
-              src="https://www.floatui.com/logo.svg"
-              width={120}
-              height={50}
-              alt="Float UI logo"
-            />
-          </a>
+        <div className="flex items-center justify-between py-3 md:py-7 md:block">
+          <Link href={"/"}>
+            <img src="vercel.svg" width={120} height={50} alt="Vercel" />
+          </Link>
           <div className="md:hidden">
             <button
               className="text-gray-500 hover:text-gray-800"
@@ -38,7 +33,7 @@ const Navbar: FC<NavbarProps> = ({}) => {
               {state ? (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
+                  className="h-9 w-9"
                   viewBox="0 0 20 20"
                   fill="currentColor"
                 >
@@ -55,7 +50,7 @@ const Navbar: FC<NavbarProps> = ({}) => {
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="w-6 h-6"
+                  className="w-9 h-9"
                 >
                   <path
                     strokeLinecap="round"
@@ -75,7 +70,7 @@ const Navbar: FC<NavbarProps> = ({}) => {
           <ul className="justify-end items-center space-y-6 md:flex md:space-x-6 md:space-y-0">
             {navigation.map((item, idx) => {
               return (
-                <li key={idx} className="text-gray-700 hover:text-indigo-600">
+                <li key={idx} className="text-gray-700 hover:text-slate-900">
                   <a href={item.path} className="block">
                     {item.title}
                   </a>
@@ -83,22 +78,18 @@ const Navbar: FC<NavbarProps> = ({}) => {
               );
             })}
             <span className="hidden w-px h-6 bg-gray-300 md:block"></span>
-            <div className="space-y-3 items-center gap-x-6 md:flex md:space-y-0">
+            <div className="space-y-3 items-center gap-x-3 md:flex md:space-y-0">
               <li>
-                <a
-                  href="javascript:void(0)"
-                  className="block py-3 text-center text-gray-700 hover:text-indigo-600 border rounded-lg md:border-none"
-                >
-                  Log in
-                </a>
+                <Link href={"/sign-up"}>
+                  <Button variant={"secondary"} className="w-full md:w-auto">
+                    Sign up
+                  </Button>
+                </Link>
               </li>
               <li>
-                <a
-                  href="javascript:void(0)"
-                  className="block py-3 px-4 font-medium text-center text-white bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 active:shadow-none rounded-lg shadow md:inline"
-                >
-                  Sign in
-                </a>
+                <Link href={"/sign-in"}>
+                  <Button className="w-full md:w-auto">Sign in</Button>
+                </Link>
               </li>
             </div>
           </ul>
@@ -106,6 +97,6 @@ const Navbar: FC<NavbarProps> = ({}) => {
       </div>
     </nav>
   );
-}
+};
 
-export default Navbar
+export default Navbar;
