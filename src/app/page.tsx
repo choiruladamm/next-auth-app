@@ -5,11 +5,8 @@ import React from "react";
 export default function Home() {
   return (
     <div className="flex gap-3">
-      <Link href="/" className={buttonVariants()}>
-        Home Page
-      </Link>
       <Link href="/admin" className={buttonVariants()}>
-        AdminPage
+        Admin Page
       </Link>
     </div>
   );
