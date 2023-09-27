@@ -1,8 +1,12 @@
+import { authOptions } from "@/lib/auth";
+import { getServerSession } from "next-auth";
 import { FC } from "react";
 
 interface AdminProps {}
 
-const Admin: FC<AdminProps> = ({}) => {
+const Admin: FC<AdminProps> = async ({}) => {
+  const session = await getServerSession(authOptions)
+  
   return <div className="grid place-items-center min-h-screen">Admin Page</div>;
 };
 
