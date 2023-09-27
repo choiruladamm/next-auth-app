@@ -36,7 +36,7 @@ const FormSchema = z.object({
 });
 
 const SignIn: FC<SignInProps> = ({}) => {
-  const router = useRouter()
+  const router = useRouter();
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -49,13 +49,14 @@ const SignIn: FC<SignInProps> = ({}) => {
     const signInData = await signIn("credentials", {
       email: values.email,
       password: values.password,
-      redirect: false
-    })
+      redirect: false,
+    });
 
     if (signInData?.error) {
       console.log(signInData.error);
     } else {
-      router.push('/admin')
+      router.refresh();
+      router.push("/admin");
     }
   };
 
