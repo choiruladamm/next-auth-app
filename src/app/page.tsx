@@ -1,10 +1,16 @@
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
+import Link from "next/link";
 import React from "react";
 
 export default function Home() {
   return (
-    <div className="grid h-screen place-items-center">
-      <Button>Home Screen</Button>
+    <div className="flex gap-3">
+      <Link href="/" className={buttonVariants()}>
+        Home Page
+      </Link>
+      <Link href="/admin" className={buttonVariants()}>
+        AdminPage
+      </Link>
     </div>
   );
 }

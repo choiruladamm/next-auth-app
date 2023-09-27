@@ -22,6 +22,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 interface SignInProps {}
 
@@ -34,6 +36,7 @@ const FormSchema = z.object({
 });
 
 const SignIn: FC<SignInProps> = ({}) => {
+  const router = useRouter()
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -42,8 +45,18 @@ const SignIn: FC<SignInProps> = ({}) => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof FormSchema>) => {
-    console.log(values);
+  const onSubmit = async (values: z.infer<typeof FormSchema>) => {
+    const signInData = await signIn("credentials", {
+      email: values.email,
+      password: values.password,
+      redirect: false
+    })
+
+    if (signInData?.error) {
+      console.log(signInData.error);
+    } else {
+      router.push('/admin')
+    }
   };
 
   return (
