@@ -24,6 +24,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useToast } from "@/components/ui/use-toast";
 
 interface SignInProps {}
 
@@ -36,6 +37,7 @@ const FormSchema = z.object({
 });
 
 const SignIn: FC<SignInProps> = ({}) => {
+  const { toast } = useToast();
   const router = useRouter();
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -53,8 +55,15 @@ const SignIn: FC<SignInProps> = ({}) => {
     });
 
     if (signInData?.error) {
-      console.log(signInData.error);
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: "There was a problem with email or password",
+      });
     } else {
+      toast({
+        title: "Loggin success",
+      });
       router.refresh();
       router.push("/admin");
     }

@@ -9,12 +9,12 @@ interface UserLoginNavProps {}
 const UserLoginNav: FC<UserLoginNavProps> = ({}) => {
   return (
     <Button
-      onClick={() =>
+      onClick={() => {
         signOut({
           redirect: true,
           callbackUrl: `${window.location.origin}/sign-in`,
         })
-      }
+      }}
       variant={"destructive"}
     >
       Sign Out

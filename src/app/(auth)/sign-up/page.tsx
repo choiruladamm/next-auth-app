@@ -23,6 +23,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useToast } from "@/components/ui/use-toast";
 
 interface SignUpProps {}
 
@@ -42,6 +43,7 @@ const FormSchema = z
   });
 
 const SignUp: FC<SignUpProps> = ({}) => {
+  const { toast } = useToast();
   const router = useRouter();
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -67,9 +69,16 @@ const SignUp: FC<SignUpProps> = ({}) => {
     });
 
     if (response.ok) {
+      toast({
+        title: "Registration success",
+      });
       router.push("/sign-in");
     } else {
-      console.error("Registration failed");
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: "There was a problem with your request.",
+      });
     }
   };
 
