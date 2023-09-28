@@ -4,6 +4,12 @@ import { FC } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useToast } from "@/components/ui/use-toast";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   Card,
   CardContent,
@@ -19,12 +25,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import { useToast } from "@/components/ui/use-toast";
 
 interface SignInProps {}
 
@@ -61,11 +61,11 @@ const SignIn: FC<SignInProps> = ({}) => {
         description: "There was a problem with email or password",
       });
     } else {
+      router.refresh();
+      router.push("/admin");
       toast({
         title: "Loggin success",
       });
-      router.refresh();
-      router.push("/admin");
     }
   };
 

@@ -4,6 +4,11 @@ import { FC } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { useToast } from "@/components/ui/use-toast";
 import {
   Card,
   CardContent,
@@ -19,11 +24,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useToast } from "@/components/ui/use-toast";
 
 interface SignUpProps {}
 
@@ -69,10 +69,10 @@ const SignUp: FC<SignUpProps> = ({}) => {
     });
 
     if (response.ok) {
+      router.push("/sign-in");
       toast({
         title: "Registration success",
       });
-      router.push("/sign-in");
     } else {
       toast({
         variant: "destructive",
