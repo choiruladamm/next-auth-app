@@ -16,10 +16,10 @@ const Navbar: FC<NavbarProps> = ({}) => {
   const { data: session } = useSession();
 
   const navigation = [
-    { title: "Features", path: "#" },
-    { title: "Integrations", path: "#" },
-    { title: "Customers", path: "#" },
-    { title: "Pricing", path: "#" },
+    { title: "Features", path: "/" },
+    { title: "Integrations", path: "/" },
+    { title: "Customers", path: "/" },
+    { title: "Pricing", path: "/" },
   ];
 
   return (
@@ -47,9 +47,9 @@ const Navbar: FC<NavbarProps> = ({}) => {
             {navigation.map((item, idx) => {
               return (
                 <li key={idx} className="text-gray-700 hover:text-slate-900">
-                  <a href={item.path} className="block">
+                  <Link href={item.path} className="block">
                     {item.title}
-                  </a>
+                  </Link>
                 </li>
               );
             })}
@@ -92,4 +92,4 @@ const Navbar: FC<NavbarProps> = ({}) => {
   );
 };
 
-export default Navbar
+export default Navbar;
