@@ -1,15 +1,19 @@
 /* eslint-disable @next/next/no-img-element */
+
 "use client";
 
 import Link from "next/link";
 import { FC, useState } from "react";
-import { Button } from "./ui/button";
+import { Button, buttonVariants } from "./ui/button";
 import { Icons } from ".";
+import { useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
 
 interface NavbarProps {}
 
 const Navbar: FC<NavbarProps> = ({}) => {
   const [state, setState] = useState<boolean>(false);
+  const { data: session } = useSession();
 
   const navigation = [
     { title: "Features", path: "#" },
@@ -51,18 +55,35 @@ const Navbar: FC<NavbarProps> = ({}) => {
             })}
             <span className="hidden w-px h-6 bg-gray-300 md:block"></span>
             <div className="space-y-3 items-center gap-x-3 md:flex md:space-y-0">
-              <li>
-                <Link href={"/sign-up"}>
-                  <Button variant={"secondary"} className="w-full md:w-auto">
-                    Sign up
-                  </Button>
-                </Link>
-              </li>
-              <li>
-                <Link href={"/sign-in"}>
-                  <Button className="w-full md:w-auto">Sign in</Button>
-                </Link>
-              </li>
+              {session?.user ? (
+                <Button
+                  onClick={() => {
+                    signOut({
+                      redirect: true,
+                      callbackUrl: `${window.location.origin}/sign-in`,
+                    });
+                  }}
+                  variant={"destructive"}
+                  className="w-full md:w-auto"
+                >
+                  Sign Out
+                </Button>
+              ) : (
+                <>
+                  <div className="flex flex-col md:flex-row gap-3">
+                    <Link
+                      href={"/sign-up"}
+                      className={buttonVariants({ variant: "secondary" })}
+                    >
+                      Sign up
+                    </Link>
+
+                    <Link href={"/sign-in"} className={buttonVariants()}>
+                      Sign in
+                    </Link>
+                  </div>
+                </>
+              )}
             </div>
           </ul>
         </div>
@@ -71,4 +92,4 @@ const Navbar: FC<NavbarProps> = ({}) => {
   );
 };
 
-export default Navbar;
+export default Navbar
