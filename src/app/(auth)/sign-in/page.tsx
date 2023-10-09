@@ -60,9 +60,10 @@ const SignIn: FC<SignInProps> = ({}) => {
     if (signInData?.error) {
       toast({
         variant: "destructive",
-        title: "Uh oh! Something went wrong.",
+        title: "Something went wrong.",
         description: "There was a problem with email or password",
       });
+      setIsLoading(false);
     } else {
       router.refresh();
       router.push("/admin");

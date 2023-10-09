@@ -79,9 +79,10 @@ const SignUp: FC<SignUpProps> = ({}) => {
     } else {
       toast({
         variant: "destructive",
-        title: "Uh oh! Something went wrong.",
-        description: "There was a problem with your request.",
+        title: "Something went wrong.",
+        description: "email or username already exist",
       });
+      setIsLoading(false);
     }
   };
 
