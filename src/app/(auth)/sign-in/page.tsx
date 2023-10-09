@@ -1,6 +1,6 @@
 "use client";
 
-import { FC } from "react";
+import { FC, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -25,6 +25,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { Loader2 } from "lucide-react";
 
 interface SignInProps {}
 
@@ -37,6 +38,7 @@ const FormSchema = z.object({
 });
 
 const SignIn: FC<SignInProps> = ({}) => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const { toast } = useToast();
   const router = useRouter();
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -48,6 +50,7 @@ const SignIn: FC<SignInProps> = ({}) => {
   });
 
   const onSubmit = async (values: z.infer<typeof FormSchema>) => {
+    setIsLoading(true);
     const signInData = await signIn("credentials", {
       email: values.email,
       password: values.password,
@@ -116,9 +119,20 @@ const SignIn: FC<SignInProps> = ({}) => {
                   )}
                 />
               </div>
-              <Button type="submit" className="w-full mt-7">
-                Sign in
-              </Button>
+              {isLoading ? (
+                <>
+                  <Button disabled className="w-full mt-7">
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Please wait
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Button type="submit" className="w-full mt-7">
+                    Sign in
+                  </Button>
+                </>
+              )}
             </form>
           </Form>
         </CardContent>
