@@ -8,11 +8,13 @@ import { Button, buttonVariants } from "./ui/button";
 import { Icons } from ".";
 import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
+import { Loader2 } from "lucide-react";
 
 interface NavbarProps {}
 
 const Navbar: FC<NavbarProps> = ({}) => {
   const [state, setState] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const { data: session } = useSession();
 
   const navigation = [
@@ -58,31 +60,35 @@ const Navbar: FC<NavbarProps> = ({}) => {
               {session?.user ? (
                 <Button
                   onClick={() => {
+                    setIsLoading(true);
                     signOut({
                       redirect: true,
                       callbackUrl: `${window.location.origin}/sign-in`,
                     });
                   }}
                   variant={"destructive"}
-                  className="w-full md:w-auto"
+                  className="w-full md:w-20"
+                  disabled={isLoading}
                 >
-                  Sign Out
+                  {isLoading ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : (
+                    "Logout"
+                  )}
                 </Button>
               ) : (
-                <>
-                  <div className="flex flex-col md:flex-row gap-3">
-                    <Link
-                      href={"/sign-up"}
-                      className={buttonVariants({ variant: "secondary" })}
-                    >
-                      Sign up
-                    </Link>
+                <div className="flex flex-col md:flex-row gap-3">
+                  <Link
+                    href={"/sign-up"}
+                    className={buttonVariants({ variant: "secondary" })}
+                  >
+                    Sign up
+                  </Link>
 
-                    <Link href={"/sign-in"} className={buttonVariants()}>
-                      Sign in
-                    </Link>
-                  </div>
-                </>
+                  <Link href={"/sign-in"} className={buttonVariants()}>
+                    Sign in
+                  </Link>
+                </div>
               )}
             </div>
           </ul>
