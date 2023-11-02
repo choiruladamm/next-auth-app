@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import { Toaster } from "@/components/ui/toaster";
 import Provider from "@/components/Provider";
 import Navbar from "@/components/Navbar";
+import { GeistSans } from "geist/font";
 
 const inter = Inter({ subsets: ["latin"] });
 
